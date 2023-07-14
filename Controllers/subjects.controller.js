@@ -6,9 +6,21 @@ const {
 
 exports.addSubject = async (req, res, next) => {
   try {
-    const { subjectCode, assignedClass } = req.body;
+    const {
+      subjectCode,
+      subjectName,
+      subjectType,
+      assignedGroup,
+      assignedClass,
+    } = req.body;
     const subjectExists = await Subject.exists({
-      $and: [{ subjectCode: subjectCode }, { assignedClass: assignedClass }],
+      $and: [
+        { subjectCode: subjectCode },
+        { assignedClass: assignedClass },
+        { subjectName: subjectName },
+        { subjectType: subjectType },
+        { assignedGroup: assignedGroup },
+      ],
     });
     if (subjectExists) {
       return res.status(409).json({

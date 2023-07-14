@@ -56,26 +56,79 @@ const adminSchema = mongoose.Schema(
       type: String,
       required: true,
     },
-
-    teachers: [{ type: ObjectId, ref: "Teacher" }],
-
-    students: [{ type: ObjectId, ref: "Student" }],
-
-    classSchedules: [],
-    subjects: [],
-
-    dayShiftRoutine: [],
-    morningShiftRoutine: [],
-
-    teacherAttendance: [],
-
-    dayShiftTransportSchedule: [],
-    morningShiftTransportSchedule: [],
-
-    examSchedule: [],
-    examsGrade: [],
-    notices: [],
-    accountSetting: [],
+    teachers: [
+      {
+        type: ObjectId,
+        ref: "Teacher",
+      },
+    ],
+    teachersAttendances: [
+      {
+        type: ObjectId,
+        ref: "TeacherAttendance",
+      },
+    ],
+    students: [
+      {
+        type: ObjectId,
+        ref: "Student",
+      },
+    ],
+    classSchedules: [
+      {
+        type: ObjectId,
+        ref: "ClassSchedule",
+      },
+    ],
+    subjects: [
+      {
+        type: ObjectId,
+        ref: "Subject",
+      },
+    ],
+    dayShiftRoutines: [
+      {
+        type: ObjectId,
+        ref: "Routine",
+      },
+    ],
+    morningShiftRoutines: [
+      {
+        type: ObjectId,
+        ref: "Routine",
+      },
+    ],
+    dayShiftTransportSchedules: [
+      {
+        type: ObjectId,
+      },
+    ],
+    morningShiftTransportSchedules: [
+      {
+        type: ObjectId,
+      },
+    ],
+    examSchedules: [
+      {
+        type: ObjectId,
+        ref: "ExamSchedule",
+      },
+    ],
+    examsGrades: [
+      {
+        type: ObjectId,
+      },
+    ],
+    notices: [
+      {
+        type: ObjectId,
+      },
+    ],
+    accountSettings: [
+      {
+        type: ObjectId,
+      },
+    ],
   },
   { timestamps: true }
 );

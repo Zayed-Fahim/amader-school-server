@@ -12,7 +12,11 @@ exports.loginAdminByEmail = async (req, res, next) => {
         message: "No Admin found for this id.Please Sign up.",
       });
     }
-    const admin = await Admin.findOne({ email: email });
+    const admin = await Admin.findOne({ email: email })
+      .populate([{ path: "teachers", strictPopulate: false }])
+      .populate([{ path: "students", strictPopulate: false }])
+      .populate([{ path: "classSchedules", strictPopulate: false }])
+      .populate([{ path: "subjects", strictPopulate: false }]);
     if (admin) {
       return bcrypt.compare(password, admin.password, (err, result) => {
         if (result === true) {
@@ -40,15 +44,26 @@ exports.loginAdminByEmail = async (req, res, next) => {
       error: error.message,
     });
   }
-  next();
 };
 
 exports.verifyAdmin = async (req, res) => {
   try {
     const admin = await Admin.findOne({ email: req.admin?.email })
-      .populate("students")
-      .populate("teachers");
-    console.log("from admin controller",admin);
+      .populate([{ path: "teachers", strictPopulate: false }])
+      .populate([{ path: "students", strictPopulate: false }])
+      .populate([{ path: "classSchedules", strictPopulate: false }])
+      .populate([{ path: "subjects", strictPopulate: false }])
+      .populate([{ path: "dayShiftRoutines", strictPopulate: false }])
+      .populate([{ path: "morningShiftRoutines", strictPopulate: false }])
+      .populate([{ path: "dayShiftTransportSchedules", strictPopulate: false }])
+      .populate([
+        { path: "morningShiftTransportSchedules", strictPopulate: false },
+      ])
+      .populate([{ path: "examsGrades", strictPopulate: false }])
+      .populate([{ path: "accountSettings", strictPopulate: false }])
+      .populate([{ path: "examSchedules", strictPopulate: false }]);
+
+    console.log("from admin controller", admin);
     res.status(200).json({
       message: "Success",
       payload: { admin },

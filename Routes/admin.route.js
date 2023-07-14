@@ -7,5 +7,7 @@ router
   .route("/")
   .post(adminController.createAdmin)
   .get(adminController.getAdmins);
-
+router
+  .route("/:adminId/teachersAttendances")
+  .get(adminController.viewAttendancesDataFilterByDateAndShift);
 module.exports = router;

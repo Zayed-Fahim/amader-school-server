@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const { ObjectId } = mongoose.Schema.Types;
 
 const subjectSchema = mongoose.Schema(
   {
@@ -29,6 +30,12 @@ const subjectSchema = mongoose.Schema(
         values: ["Science", "Arts", "Commerce"],
         message:
           "Assigned Group can't be {VALUE}, must be Science/Arts/Commerce.",
+      },
+    },
+    admin: {
+      id: {
+        type: ObjectId,
+        required: true,
       },
     },
   },

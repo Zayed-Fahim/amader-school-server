@@ -12,7 +12,6 @@ const teacherSchema = mongoose.Schema(
     userName: {
       type: String,
       required: true,
-      unique: true,
       trim: true,
     },
     gender: {
@@ -93,6 +92,9 @@ const teacherSchema = mongoose.Schema(
       type: String,
       required: true,
     },
+    teacherOfGroup: {
+      type: String,
+    },
     subjectName: {
       type: String,
       required: true,
@@ -129,12 +131,12 @@ const teacherSchema = mongoose.Schema(
         ref: "Admin",
       },
     },
-    advisedStudents: [],
-    salary: {
-      amounts: [],
-      statuses: [],
-      issueDates: [],
-    },
+    advisedStudents: [
+      {
+        type: ObjectId,
+        ref: "Student",
+      },
+    ],
   },
   { timestamps: true }
 );

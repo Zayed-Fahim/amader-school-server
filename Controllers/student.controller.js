@@ -31,6 +31,8 @@ exports.addStudent = async (req, res, next) => {
       address,
       shortBio,
       shift,
+      classTeacher,
+      schoolAuthority,
     } = req.body;
 
     const studentExists = await Student.exists({ id: id });
@@ -63,6 +65,8 @@ exports.addStudent = async (req, res, next) => {
         address,
         shortBio,
         shift,
+        classTeacher,
+        schoolAuthority,
       };
       const result = await addStudentService(student);
       res.status(200).json({

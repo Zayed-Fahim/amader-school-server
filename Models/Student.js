@@ -153,13 +153,20 @@ const studentSchema = mongoose.Schema(
         message: "Shift can't be {VALUE}, must be Morning/Day",
       },
     },
-    // admin: {
-    //   id: {
-    //     type: ObjectId,
-    //     required: true,
-    //     ref: "Teacher",
-    //   },
-    // },
+    classTeacher: {
+      id: {
+        type: ObjectId,
+        required: true,
+        ref: "Teacher",
+      },
+    },
+    schoolAuthority: {
+      id: {
+        type: ObjectId,
+        required: true,
+        ref: "Admin",
+      },
+    },
   },
   { timestamps: true }
 );

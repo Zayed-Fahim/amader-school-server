@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const validator = require("validator");
+const { ObjectId } = mongoose.Schema.Types;
 
 const classScheduleSchema = mongoose.Schema({
   teacherName: {
@@ -60,6 +61,13 @@ const classScheduleSchema = mongoose.Schema({
   classTime: {
     type: Array,
     required: true,
+  },
+  admin: {
+    id: {
+      type: ObjectId,
+      required: true,
+      
+    },
   },
 });
 

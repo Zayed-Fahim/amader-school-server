@@ -6,7 +6,19 @@ exports.createAdminService = async (data) => {
 };
 
 exports.getAdminsService = async () => {
-  const result = await Admin.find({}).populate("students").populate("teachers");
+  const result = await Admin.find({});
   return result;
 };
 
+exports.viewAttendancesDataFilterByDateAndShiftService = async (
+  adminId,
+  shift,
+  date
+) => {
+  const admin = await Admin.findById(adminId).populate("teachersAttendances");
+
+  const attendanceData = admin.teachersAttendances.filter(
+    (attendance) => attendance.shift === shift && attendance.date === date
+  );
+  return attendanceData;
+};

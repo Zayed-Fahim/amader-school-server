@@ -44,10 +44,12 @@ exports.loginTeacherById = async (req, res, next) => {
 
 exports.verifyTeacher = async (req, res) => {
   try {
-    const teacher = await Teacher.findOne({ id: req.teacher?.id }).populate(
-      "advisedStudents"
-    );
-    console.log("from teacher controller",teacher);
+    const teacher = await Teacher.findOne({ id: req.teacher?.id }).populate({
+      path: "advisedStudents",
+      strictPopulate: false,
+    });
+
+    console.log("from teacher", teacher);
     res.status(200).json({
       message: "Success",
       payload: { teacher },

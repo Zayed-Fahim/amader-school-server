@@ -7,5 +7,8 @@ router
   .route("/")
   .post(teacherAttendanceController.addTeacherAttendance)
   .get(teacherAttendanceController.getAllTeacherAttendance);
+router
+  .route("/admins/:adminId/teachers")
+  .get(teacherAttendanceController.filterGetTeachersByShift);
 
 module.exports = router;

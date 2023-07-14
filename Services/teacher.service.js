@@ -7,13 +7,11 @@ exports.addTeacherService = async (data) => {
   const { _id: teacherId, admin } = teacher;
 
   // update admin
-  const result = await Admin.updateOne(
-    {
-      _id: admin.id,
-    },
-    { $push: { teachers: teacherId } }
-  );
-
+  const findAdmin = await Admin.findOne({ _id: admin.id });
+  if (findAdmin) {
+    findAdmin.teachers.push(teacherId);
+    await findAdmin.save();
+  }
   return teacher;
 };
 
