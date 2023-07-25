@@ -2,7 +2,11 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 
-app.use(cors());
+const corsOptions = {
+  origin: "https://v1-app-amader-school.web.app",
+};
+
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
