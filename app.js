@@ -1,9 +1,30 @@
 const express = require("express");
 const app = express();
 const cors = require("cors");
+require("dotenv").config();
+const errorHandler = require("./Middleware/errorHandler");
 
+// Define the allowed origins based on your requirements
+const allowedOrigins = [
+  "https://v1-app-amader-school.web.app",
+  "http://localhost:3000",
+];
+
+// Set up the CORS options object
 const corsOptions = {
-  origin: "https://v1-app-amader-school.web.app",
+  origin: function (origin, callback) {
+    // Check if the request origin is allowed
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true); // Allow the request
+    } else {
+      callback(new Error("Not allowed by CORS")); // Block the request
+    }
+  },
+  methods: "GET,POST,PUT,DELETE",
+  allowedHeaders: "Content-Type,Authorization",
+  credentials: true, // Enable credentials (cookies, authorization headers) for CORS requests
+  preflightContinue: false, // Disable preflight response caching
+  optionsSuccessStatus: 200, // Change the success status for preflight requests
 };
 
 app.use(cors(corsOptions));
@@ -21,7 +42,7 @@ const subjectsRoute = require("./Routes/subjects.route");
 const addRoutineRoute = require("./Routes/addRoutine.route");
 const viewRoutineRoute = require("./Routes/viewRoutine.route");
 const teacherAttendanceRoute = require("./Routes/teacherAttendance.route");
-const examsScheduleRoute = require(".//Routes/examSchedule.route");
+const examsScheduleRoute = require("./Routes/examSchedule.route");
 
 app.use("/api/v1/admin-login", loginAdminRoute);
 app.use("/api/v1/teacher-login", loginTeacherRoute);
@@ -35,6 +56,7 @@ app.use("/api/v1/add-routine", addRoutineRoute);
 app.use("/api/v1/view-routine", viewRoutineRoute);
 app.use("/api/v1/teacher-attendance", teacherAttendanceRoute);
 app.use("/api/v1/exams-schedule", examsScheduleRoute);
+app.use(errorHandler);
 
 app.get("/", (req, res) => {
   res.status(200).send("Amader school server is running!");

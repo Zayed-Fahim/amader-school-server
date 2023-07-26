@@ -98,16 +98,6 @@ const adminSchema = mongoose.Schema(
         ref: "Routine",
       },
     ],
-    dayShiftTransportSchedules: [
-      {
-        type: ObjectId,
-      },
-    ],
-    morningShiftTransportSchedules: [
-      {
-        type: ObjectId,
-      },
-    ],
     examSchedules: [
       {
         type: ObjectId,

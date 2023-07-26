@@ -6,16 +6,37 @@
       "use": "@vercel/node"
     }
   ],
-  "routes": [
+  "rewrites": [
     {
-      "src": "/(.*)",
-      "methods": ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
-      "headers": {
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Methods": "GET, POST, PUT, PATCH, DELETE",
-        "Access-Control-Allow-Headers": "Authorization, Content-Type"
-      },
-      "dest": "server.js"
+      "source": "/(.*)",
+      "destination": "/server.js"
+    },
+    {
+      "source": "/api/v1/(.*)",
+      "destination": "/server.js"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "Access-Control-Allow-Origin",
+          "value": "*"
+        },
+        {
+          "key": "Access-Control-Allow-Methods",
+          "value": "GET, POST, PUT, PATCH, DELETE"
+        },
+        {
+          "key": "Access-Control-Allow-Headers",
+          "value": "Authorization, Content-Type"
+        },
+        {
+          "key": "cache-control",
+          "value": "s-maxage=1, stale-while-revalidate"
+        }
+      ]
     }
   ]
 }
