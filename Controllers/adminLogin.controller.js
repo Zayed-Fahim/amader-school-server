@@ -49,7 +49,7 @@ exports.verifyAdmin = async (req, res) => {
   try {
     const admin = await Admin.findOne({ email: req.admin.email }).populate([
       {
-        path: "teachers students classSchedules subjects dayShiftRoutines morningShiftRoutines dayShiftTransportSchedules morningShiftTransportSchedules examsGrades accountSettings examSchedules",
+        path: "teachers students classSchedules subjects dayShiftRoutines morningShiftRoutines dayShiftTransportSchedules morningShiftTransportSchedules examsGrades accountSettings examSchedules notices",
         strictPopulate: false,
       },
     ]);

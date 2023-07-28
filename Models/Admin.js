@@ -54,7 +54,7 @@ const adminSchema = mongoose.Schema(
     },
     photo: {
       type: String,
-      required: true,
+      require: true,
     },
     teachers: [
       {

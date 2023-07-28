@@ -137,6 +137,11 @@ const teacherSchema = mongoose.Schema(
         ref: "Student",
       },
     ],
+    notices: [],
+    events: [],
+    results: [],
+    attendances: [],
+    classSchedules: [],
   },
   { timestamps: true }
 );

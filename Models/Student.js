@@ -167,6 +167,10 @@ const studentSchema = mongoose.Schema(
         ref: "Admin",
       },
     },
+    notices: [],
+    results: [],
+    events: [],
+    attendances: [],
   },
   { timestamps: true }
 );

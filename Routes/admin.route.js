@@ -10,4 +10,5 @@ router
 router
   .route("/:adminId/teachersAttendances")
   .get(adminController.viewAttendancesDataFilterByDateAndShift);
+
 module.exports = router;

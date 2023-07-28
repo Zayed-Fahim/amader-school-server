@@ -59,14 +59,17 @@ const classScheduleSchema = mongoose.Schema({
     required: true,
   },
   classTime: {
-    type: Array,
+    type: String,
     required: true,
   },
   admin: {
     id: {
       type: ObjectId,
       required: true,
-      
+    },
+    schoolTag: {
+      type: String,
+      required: true,
     },
   },
 });

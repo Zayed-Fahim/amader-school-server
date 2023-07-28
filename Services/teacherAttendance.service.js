@@ -5,7 +5,7 @@ exports.addTeacherAttendanceService = async (data) => {
   const attendanceData = await TeacherAttendance.create(data);
   const { _id: teacherAttendanceId, admin } = attendanceData;
 
-  const findAdmin = await Admin.exists({ _id: admin.id });
+  const findAdmin = await Admin.findById({ _id: admin.id });
   if (findAdmin) {
     findAdmin.teachersAttendances.push(teacherAttendanceId);
     await findAdmin.save();
@@ -21,7 +21,6 @@ exports.getAllTeacherAttendanceService = () => {
 exports.filterGetTeachersByShiftService = async (adminId, shift) => {
   // Find the admin by ID and populate the 'teachers' field
   const admin = await Admin.findById(adminId).populate("teachers");
-
   // Filter teachers based on the shift
   const filteredTeachers = admin.teachers.filter(
     (teacher) => teacher.shift === shift

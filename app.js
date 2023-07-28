@@ -20,7 +20,7 @@ const corsOptions = {
       callback(new Error("Not allowed by CORS")); // Block the request
     }
   },
-  methods: "GET,POST,PUT,DELETE",
+  methods: "GET,POST,PUT,DELETE,PATCH",
   allowedHeaders: "Content-Type,Authorization",
   credentials: true, // Enable credentials (cookies, authorization headers) for CORS requests
   preflightContinue: false, // Disable preflight response caching
@@ -43,6 +43,8 @@ const addRoutineRoute = require("./Routes/addRoutine.route");
 const viewRoutineRoute = require("./Routes/viewRoutine.route");
 const teacherAttendanceRoute = require("./Routes/teacherAttendance.route");
 const examsScheduleRoute = require("./Routes/examSchedule.route");
+const noticeRoute = require("./Routes/notice.route");
+const updateProfileRoute = require("./Routes/updateProfile.route");
 
 app.use("/api/v1/admin-login", loginAdminRoute);
 app.use("/api/v1/teacher-login", loginTeacherRoute);
@@ -56,6 +58,8 @@ app.use("/api/v1/add-routine", addRoutineRoute);
 app.use("/api/v1/view-routine", viewRoutineRoute);
 app.use("/api/v1/teacher-attendance", teacherAttendanceRoute);
 app.use("/api/v1/exams-schedule", examsScheduleRoute);
+app.use("/api/v1/notices", noticeRoute);
+app.use("/api/v1/update-profile", updateProfileRoute);
 app.use(errorHandler);
 
 app.get("/", (req, res) => {
