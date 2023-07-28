@@ -13,7 +13,7 @@ exports.addSubject = async (req, res, next) => {
       assignedGroup,
       assignedClass,
     } = req.body;
-    const subjectExists = await Subject.exists({
+    const subjectExists = await Subject.findOne({
       $and: [
         { subjectCode: subjectCode },
         { assignedClass: assignedClass },

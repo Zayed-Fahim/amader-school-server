@@ -47,12 +47,15 @@ exports.loginAdminByEmail = async (req, res, next) => {
 
 exports.verifyAdmin = async (req, res) => {
   try {
-    const admin = await Admin.findOne({ email: req.admin.email }).populate([
-      {
-        path: "teachers students classSchedules subjects dayShiftRoutines morningShiftRoutines dayShiftTransportSchedules morningShiftTransportSchedules examsGrades accountSettings examSchedules notices",
-        strictPopulate: false,
-      },
-    ]);
+    const admin = await Admin.findOne({ email: req.admin.email })
+      .populate([
+        {
+          path: "teachers students classSchedules subjects dayShiftRoutines morningShiftRoutines dayShiftTransportSchedules morningShiftTransportSchedules examsGrades accountSettings examSchedules notices",
+          options: { sort: { _id: -1 } },
+          strictPopulate: false, // Sort the populated documents by _id in descending order
+        },
+      ])
+      .exec(); // Use exec() to execute the query
 
     console.log("from admin controller", admin);
     res.status(200).json({

@@ -112,11 +112,7 @@ const adminSchema = mongoose.Schema(
     notices: [
       {
         type: ObjectId,
-      },
-    ],
-    accountSettings: [
-      {
-        type: ObjectId,
+        ref: "Notice",
       },
     ],
   },
