@@ -8,5 +8,8 @@ router
   .post(teacherController.addTeacher)
   .get(teacherController.getTeachers);
 
-
+router
+  .route("/:teacherId/advisedStudentsAttendances")
+  .get(teacherController.viewAttendancesDataFilterByDate);
+  
 module.exports = router;

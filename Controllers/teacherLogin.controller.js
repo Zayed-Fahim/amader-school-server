@@ -45,7 +45,8 @@ exports.loginTeacherById = async (req, res, next) => {
 exports.verifyTeacher = async (req, res) => {
   try {
     const teacher = await Teacher.findOne({ id: req.teacher?.id }).populate({
-      path: "advisedStudents",
+      path: "advisedStudents notices events results advisedStudentsAttendances attendances classSchedules",
+      options: { sort: { _id: -1 } },
       strictPopulate: false,
     });
 

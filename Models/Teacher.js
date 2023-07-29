@@ -137,10 +137,21 @@ const teacherSchema = mongoose.Schema(
         ref: "Student",
       },
     ],
-    notices: [],
+    notices: [
+      {
+        type: ObjectId,
+        ref: "Notice",
+      },
+    ],
     events: [],
     results: [],
     attendances: [],
+    advisedStudentsAttendances: [
+      {
+        type: ObjectId,
+        ref: "StudentAttendance",
+      },
+    ],
     classSchedules: [],
   },
   { timestamps: true }

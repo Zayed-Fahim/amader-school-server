@@ -2,6 +2,7 @@ const Teacher = require("../Models/Teacher");
 const {
   addTeacherService,
   getTeachersService,
+  viewAttendancesDataFilterByDateService,
 } = require("../Services/teacher.service");
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
@@ -102,5 +103,19 @@ exports.getTeachers = async (req, res, next) => {
       message: "Couldn't get all teachers details.",
       error: error.message,
     });
+  }
+};
+
+exports.viewAttendancesDataFilterByDate = async (req, res) => {
+  try {
+    const { teacherId } = req.params;
+    const { date } = req.query;
+    const attendanceData = await viewAttendancesDataFilterByDateService(
+      teacherId,
+      date
+    );
+    res.status(200).json({ status: "Success", payload: { attendanceData } });
+  } catch (error) {
+    res.status(500).json({ message: "Failed to fetch Data." });
   }
 };
