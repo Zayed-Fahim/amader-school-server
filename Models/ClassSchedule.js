@@ -62,6 +62,10 @@ const classScheduleSchema = mongoose.Schema({
     type: String,
     required: true,
   },
+  roomNumber: {
+    type: String,
+    required: true,
+  },
   admin: {
     id: {
       type: ObjectId,
