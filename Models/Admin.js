@@ -115,6 +115,12 @@ const adminSchema = mongoose.Schema(
         ref: "Notice",
       },
     ],
+    results: [
+      {
+        type: ObjectId,
+        ref: "Result",
+      },
+    ],
   },
   { timestamps: true }
 );

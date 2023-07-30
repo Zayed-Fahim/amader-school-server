@@ -44,6 +44,7 @@ const viewRoutineRoute = require("./Routes/viewRoutine.route");
 const teacherAttendanceRoute = require("./Routes/teacherAttendance.route");
 const studentAttendanceRoute = require("./Routes/studentAttendance.route");
 const examsScheduleRoute = require("./Routes/examSchedule.route");
+const resultRoute = require("./Routes/result.route");
 const noticeRoute = require("./Routes/notice.route");
 const updateProfileRoute = require("./Routes/updateProfile.route");
 
@@ -60,6 +61,7 @@ app.use("/api/v1/view-routine", viewRoutineRoute);
 app.use("/api/v1/teacher-attendance", teacherAttendanceRoute);
 app.use("/api/v1/student-attendance", studentAttendanceRoute);
 app.use("/api/v1/exams-schedule", examsScheduleRoute);
+app.use("/api/v1/student-result", resultRoute);
 app.use("/api/v1/notices", noticeRoute);
 app.use("/api/v1/update-profile", updateProfileRoute);
 app.use(errorHandler);

@@ -173,7 +173,12 @@ const studentSchema = mongoose.Schema(
         ref: "Notice",
       },
     ],
-    results: [],
+    results: [
+      {
+        type: ObjectId,
+        ref: "Result",
+      },
+    ],
     events: [],
     routines: [],
     attendances: [],
