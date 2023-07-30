@@ -44,8 +44,12 @@ exports.loginStudentById = async (req, res, next) => {
 
 exports.verifyStudent = async (req, res) => {
   try {
-    const student = await Student.findOne({ id: req.student?.id });
-    console.log("from student controller", student);
+    const student = await Student.findOne({ id: req.student?.id }).populate({
+      path: "notices events results attendances routines",
+      options: { sort: { _id: -1 } },
+      strictPopulate: false,
+    });
+    
     res.status(200).json({
       message: "Success",
       payload: { student },

@@ -145,12 +145,7 @@ const teacherSchema = mongoose.Schema(
     ],
     events: [],
     results: [],
-    attendances: [
-      {
-        type: ObjectId,
-        ref: "TeacherAttendance",
-      },
-    ],
+    attendances: [],
     advisedStudentsAttendances: [
       {
         type: ObjectId,

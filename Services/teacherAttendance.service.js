@@ -3,14 +3,52 @@ const TeacherAttendance = require("../Models/TeacherAttendance");
 
 exports.addTeacherAttendanceService = async (data) => {
   const attendanceData = await TeacherAttendance.create(data);
-  const { _id: teacherAttendanceId, admin } = attendanceData;
+  const {
+    _id: attendanceId,
+    admin,
+    date,
+    teachersAttendances,
+  } = attendanceData;
 
-  const findAdmin = await Admin.findById({ _id: admin.id });
-  if (findAdmin) {
-    findAdmin.teachersAttendances.push(teacherAttendanceId);
-    await findAdmin.save();
+  try {
+    const findAdmin = await Admin.findById(admin.id).populate("teachers");
+
+    if (findAdmin) {
+      for (const teacher of findAdmin.teachers) {
+        const { _id, shift, id } = teacher;
+        const teacherAttendanceRecord = teachersAttendances.find(
+          (teacherAttendance) =>
+            teacherAttendance.teacher_Id === _id.toString() &&
+            teacherAttendance.teacherId === id.toString() &&
+            teacherAttendance.teacherShift === shift
+        );
+
+        if (teacherAttendanceRecord) {
+          // Create a new teacher attendance object
+          const newTeacherAttendance = {
+            _id: attendanceData._id,
+            date: date,
+            attendanceStatus: teacherAttendanceRecord.attendanceStatus,
+          };
+
+          // Push the new teacher attendance to the attendances array
+          teacher.attendances.push(newTeacherAttendance);
+        }
+      }
+
+      findAdmin.teachersAttendances.push(attendanceId);
+      await Promise.all([
+        findAdmin.save(),
+        ...findAdmin.teachers.map((teacher) => teacher.save()),
+      ]);
+    }
+
+    return attendanceData;
+  } catch (error) {
+    console.error(error);
+    // Handle error appropriately
+    throw new Error("Failed to add teacher attendance.");
   }
-  return attendanceData;
 };
 
 exports.getAllTeacherAttendanceService = () => {
