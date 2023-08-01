@@ -65,7 +65,6 @@ app.use("/api/v1/exams-schedule", examsScheduleRoute);
 app.use("/api/v1/student-result", resultRoute);
 app.use("/api/v1/events", eventRoute);
 app.use("/api/v1/notices", noticeRoute);
-
 app.use("/api/v1/update-profile", updateProfileRoute);
 app.use(errorHandler);
 
