@@ -179,7 +179,12 @@ const studentSchema = mongoose.Schema(
         ref: "Result",
       },
     ],
-    events: [],
+    events: [
+      {
+        type: ObjectId,
+        ref: "Event",
+      },
+    ],
     routines: [],
     attendances: [],
   },

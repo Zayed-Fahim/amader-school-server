@@ -20,7 +20,6 @@ const resultSchema = mongoose.Schema(
     studentId: {
       type: String,
       uppercase: true,
-      unique: true,
       required: true,
     },
     studentName: {
