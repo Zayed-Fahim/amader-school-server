@@ -185,7 +185,12 @@ const studentSchema = mongoose.Schema(
         ref: "Event",
       },
     ],
-    routines: [],
+    routines: [
+      {
+        type: ObjectId,
+        ref: "Routine",
+      },
+    ],
     attendances: [],
   },
   { timestamps: true }

@@ -86,18 +86,6 @@ const adminSchema = mongoose.Schema(
         ref: "Subject",
       },
     ],
-    dayShiftRoutines: [
-      {
-        type: ObjectId,
-        ref: "Routine",
-      },
-    ],
-    morningShiftRoutines: [
-      {
-        type: ObjectId,
-        ref: "Routine",
-      },
-    ],
     examSchedules: [
       {
         type: ObjectId,
@@ -113,6 +101,12 @@ const adminSchema = mongoose.Schema(
       {
         type: ObjectId,
         ref: "Notice",
+      },
+    ],
+    routines: [
+      {
+        type: ObjectId,
+        ref: "Routine",
       },
     ],
     results: [

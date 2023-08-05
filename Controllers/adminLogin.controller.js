@@ -50,7 +50,7 @@ exports.verifyAdmin = async (req, res) => {
     const admin = await Admin.findOne({ email: req.admin.email })
       .populate([
         {
-          path: "teachers students classSchedules subjects dayShiftRoutines morningShiftRoutines dayShiftTransportSchedules morningShiftTransportSchedules examsGrades accountSettings examSchedules notices",
+          path: "teachers students classSchedules subjects results accountSettings examSchedules notices routines",
           options: { sort: { _id: -1 } },
           strictPopulate: false, // Sort the populated documents by _id in descending order
         },
